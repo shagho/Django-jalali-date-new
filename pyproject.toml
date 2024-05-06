@@ -1,0 +1,32 @@
+[project]
+name = "Django-jalali-date-new"
+version = "1.0"
+authors = [
+  { name="navid shaghouzaei", email="navid.shagho003@gmail.com" },
+]
+description = "With this package you can use persian calendar in admin interface and views"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "django >= 2.2",
+    "jdatetime >= 4.1.1"
+]
+
+[project.urls]
+Homepage = "https://github.com/shagho/Django-jalali-date-new"
+Issues = "https://github.com/shagho/Django-jalali-date-new/issues"
+
+[tool.setuptools.packages.find]
+include = ["jalali_date_new*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.*"] # <-- this changed
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
