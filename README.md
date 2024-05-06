@@ -67,6 +67,7 @@ from jalali_date_new.fields import JalaliDateField, JalaliDateTimeField
 from jalali_date_new.widgets import AdminJalaliDateWidget, AdminJalaliDateTime,
 									AdminJalaliTime
 
+
 class TestForm(forms.ModelForm):
     class Meta:
         model = TestModel
