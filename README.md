@@ -1,3 +1,5 @@
+[![PyPi Version](https://img.shields.io/pypi/v/Django-jalali-date-new.svg)](https://pypi.python.org/pypi/Django-jalali-date-new)
+
 # Django jalali date new
 
 It's a django package that you can use for showing jalali calendar in admin interface and views.
