@@ -5,7 +5,7 @@ from django.utils.encoding import force_str
 from datetime import date as datetime_date, datetime as datetime_datetime
 from jdatetime import GregorianToJalali, JalaliToGregorian, datetime as jalali_datetime
 
-from jalali_date.utils import datetime2jalali
+from jalali_date_new.utils import datetime2jalali
 
 
 
