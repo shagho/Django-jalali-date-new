@@ -96,7 +96,7 @@ class TestForm(forms.ModelForm):
 
 <!-- loading directly -->
 <link href="{% static 'jalali_date_new/css/jalalidatepicker.min.css' %}" rel="stylesheet">
-<script src="{% static 'jalali_date_new/js/jalalidatepicker.min.js' %}" 
+<script src="{% static 'jalali_date_new/js/jalalidatepicker.min.js' %}" type="text/javascript"></script>
 <script>
     jalaliDatepicker.startWatch(
         {
