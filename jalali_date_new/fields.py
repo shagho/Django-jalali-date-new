@@ -31,8 +31,15 @@ class JalaliDateTimeField(DateTimeField):
         return jalali_datetime.strptime(force_str(value), format).togregorian()
     
     def clean(self, value: Any) -> Any:
-        val = DateTimeField().clean(value)
+        val = DateTimeField(
+            required=self.required,
+        ).clean(value)
+
+        if not val:
+            return val
+
         george_date = JalaliToGregorian(val.year, val.month, val.day).getGregorianList()
         george_datetime = datetime_datetime(year=george_date[0], month=george_date[1], day=george_date[2])
-        george_datetime = george_datetime.replace(hour=val.hour, minute=val.minute, second=val.second, tzinfo=val.tzinfo)
+        george_datetime = george_datetime.replace(hour=val.hour, minute=val.minute, second=val.second,
+                                                  tzinfo=val.tzinfo)
         return george_datetime
