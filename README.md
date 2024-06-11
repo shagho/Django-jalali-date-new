@@ -39,6 +39,16 @@ class AdminModel(admin.ModelAdmin):
     }
 ```
 
+or directly use in model:
+```python
+class MyModel(models.Model):
+    created_at = JalaliDateTimeModelField() #datetime 
+    # or
+    creared_at = JalaliDateModelField() #date only
+
+```
+
+
 you can use this for *datefield* and *timefield*:
 ```python
 #usage for datefield
