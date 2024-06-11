@@ -4,7 +4,8 @@ jalaliDatepicker.startWatch(
         separatorChars:{
             date:"-"
         },
-        time: true
+        time: true,
+        zIndex:9999,
     }
 );
 }
