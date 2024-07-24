@@ -8,7 +8,7 @@ from django.utils.encoding import force_str
 from jalali_date_new.utils import datetime2jalali, to_georgian
 from jdatetime import GregorianToJalali, datetime as jalali_datetime
 
-JDATETIME_FORMAT = getattr(settings, 'JDATETIME_FORMAT', '%Y-%m-%d %H:%M')
+JDATETIME_FORMAT = getattr(settings, 'JDATETIME_FORMAT', '%Y-%m-%d %H:%M:%S')
 
 
 class JalaliDateField(DateField):
