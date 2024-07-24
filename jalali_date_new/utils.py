@@ -1,8 +1,22 @@
 import datetime
 
+import jdatetime
+from django.forms.utils import to_current_timezone
 from django.utils import timezone
 from jdatetime import date as jalali_date
 from jdatetime import datetime as jalali_datetime
+
+
+def date2jalali(g_date):
+    return jdatetime.date.fromgregorian(date=g_date) if g_date else None
+
+
+def datetime2jalali(g_date):
+    if g_date is None:
+        return None
+
+    g_date = to_current_timezone(g_date)
+    return jdatetime.datetime.fromgregorian(datetime=g_date)
 
 
 def to_shamsi(value, _format=None, sep='-'):
