@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
+from datetime import date as datetime_date, datetime as datetime_datetime
 from typing import Any
+
+from django.conf import settings
 from django.forms.fields import DateField, DateTimeField
 from django.utils.encoding import force_str
-from datetime import date as datetime_date, datetime as datetime_datetime
-from jdatetime import GregorianToJalali, JalaliToGregorian, datetime as jalali_datetime
+from jalali_date_new.utils import datetime2jalali, to_georgian
+from jdatetime import GregorianToJalali, datetime as jalali_datetime
 
-from jalali_date_new.utils import datetime2jalali
-
+JDATETIME_FORMAT = getattr(settings, 'JDATETIME_FORMAT', '%Y-%m-%d %H:%M:%S')
 
 
 class JalaliDateField(DateField):
+
     def prepare_value(self, value):
         if isinstance(value, datetime_date):
             date_obj = GregorianToJalali(gyear=value.year, gmonth=value.month, gday=value.day)
@@ -24,15 +27,19 @@ class JalaliDateField(DateField):
 class JalaliDateTimeField(DateTimeField):
     def prepare_value(self, value):
         if isinstance(value, datetime_datetime):
-            return datetime2jalali(value).strftime('%Y-%m-%d %H:%M:%S')
+            return datetime2jalali(value).strftime(JDATETIME_FORMAT)
         return value
 
     def strptime(self, value, format):
         return jalali_datetime.strptime(force_str(value), format).togregorian()
-    
+
     def clean(self, value: Any) -> Any:
-        val = DateTimeField().clean(value)
-        george_date = JalaliToGregorian(val.year, val.month, val.day).getGregorianList()
-        george_datetime = datetime_datetime(year=george_date[0], month=george_date[1], day=george_date[2])
-        george_datetime = george_datetime.replace(hour=val.hour, minute=val.minute, second=val.second, tzinfo=val.tzinfo)
-        return george_datetime
+
+        # if self.required and not value:
+        #     raise ValidationError('Feild is Required')
+
+        if not value:
+            return None
+
+        val = to_georgian(value, with_tz=True)
+        return val
